@@ -10,6 +10,9 @@ const users=require("./schema/user")  // import model(collection)
 const bcrypt=require("bcrypt")
 const blog=require("./schema/blogdata")
 const passport=require("passport")
+const dns=require("dns")
+
+dns.setServers(["8.8.8.8","8.8.4.4"])
 require("./config/passport")
 
 
@@ -117,7 +120,7 @@ app.post("/login",async(req,res)=>{
             res.status(400).json({message:"username or password invalid",status:400})
         }
 
-        const token=jwt.sign({username:useremail.username},process.env.serect_key)
+        const token=jwt.sign({username:useremail.username},process.env.JWT_SECRET)
     
         res.cookie("logincookie",token,{
             httpOnly:true,
@@ -153,7 +156,7 @@ const auth=async (req,res,next)=>{   //  async middlewere
             return res.status(401).json({message:"unauthorized",status:401,dbdata:getbloginfo,fulldata:fulldetails})
         }
         
-        jwt.verify(token,process.env.serect_key,(error,data)=>{
+        jwt.verify(token,process.env.JWT_SECRET,(error,data)=>{
             if(error){
                 return res.status(401).json({message:"invlaid auth",status:401})
             }
