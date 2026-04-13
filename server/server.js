@@ -45,16 +45,16 @@ app.get("/auth/google/callback",
             // Set cookie
             res.cookie("logincookie", token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "strict",
+                secure: true,
+                sameSite: "none",
                 maxAge: 60 * 60 * 1000
             })
             
             // Redirect to frontend
-            res.redirect("http://localhost:5173")
+            res.redirect("https://blog-production-75ce.up.railway.app")
         } catch (error) {
             console.error(error)
-            res.redirect("http://localhost:5173/login?error=auth_failed")
+            res.redirect("https://blog-production-75ce.up.railway.app/login?error=auth_failed")
         }
     }
 )
@@ -124,8 +124,8 @@ app.post("/login",async(req,res)=>{
     
         res.cookie("logincookie",token,{
             httpOnly:true,
-            secure:false,
-            sameSite:"strict",
+            secure:true,
+            sameSite:"none",
             maxAge:60*60*1000
         })
         res.status(200).json({message:"logged in",status:200})  // convert js object in to json string

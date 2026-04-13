@@ -27,7 +27,7 @@ function Dash(){
             setLoading(true)
             
             try{
-                const userdata=await fetch("http://blog-production-75ce.up.railway.app/dashboard",{
+                const userdata=await fetch(`${import.meta.env.VITE_API_URL}/dashboard`,{
                     method: "GET",
                     credentials: "include", // send or reserve cookies
                     headers:{
@@ -64,7 +64,7 @@ function Dash(){
     const logout=async ()=>{
 
         try{
-            const logoutuser=await fetch("http://blog-production-75ce.up.railway.app/logout",{
+            const logoutuser=await fetch(`${import.meta.env.VITE_API_URL}/logout`,{
                 method: "POST",
                 credentials: "include",
                 headers :{
@@ -91,7 +91,7 @@ function Dash(){
 
             try{
 
-                const userdata=await fetch(`http://blog-production-75ce.up.railway.app?search=${searchblogs}&category=${catogary}`)
+                const userdata=await fetch(`${import.meta.env.VITE_API_URL}?search=${searchblogs}&category=${catogary}`)
                 const data=await userdata.json()
                 setdiserch(data.message)
 

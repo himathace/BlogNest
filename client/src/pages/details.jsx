@@ -26,7 +26,7 @@ function Details(){
         const displaydetails=async ()=>{
 
             try{
-                const userdata=await fetch(`http://blog-production-75ce.up.railway.app/details/${id}`,{
+                const userdata=await fetch(`${import.meta.env.VITE_API_URL}/details/${id}`,{
                     credentials:"include" // include credentials (cookies, authorization headers, and TLS client certificates) when making the HTTP request.
                 })
                 const datax=await userdata.json()
@@ -51,7 +51,7 @@ function Details(){
 
         try{
 
-            const userdata=await fetch(`http://blog-production-75ce.up.railway.app/delete/${id}`,{
+            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/delete/${id}`,{
                 method:"DELETE",
                 credentials: "include"
             })

@@ -14,7 +14,7 @@ function Register(){
 
         try{
 
-            const userdata=await fetch("http://blog-production-75ce.up.railway.app/register",{
+            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/register`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/Json"

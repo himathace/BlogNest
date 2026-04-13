@@ -14,7 +14,7 @@ function Create(){
 
         try{
 
-            const userdata=await fetch("http://blog-production-75ce.up.railway.app/create",{
+            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/create`,{
                 method:"POST",
                 credentials: "include",
                 headers:{

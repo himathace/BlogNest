@@ -10,7 +10,7 @@ function Login(){
 
     async function googlelog(){
         try{
-            window.location.href = "http://blog-production-75ce.up.railway.app/auth/google"
+            window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
         }
         catch(error){
             alert(error)
@@ -25,7 +25,7 @@ function Login(){
 
         try{
 
-            const responce=await fetch("http://blog-production-75ce.up.railway.app/login",{
+            const responce=await fetch(`${import.meta.env.VITE_API_URL}/login`,{
                 method:"POST",
                 credentials:"include",
                 headers:{

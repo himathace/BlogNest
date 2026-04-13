@@ -16,7 +16,7 @@ function Update(){
     const updatedata=async ()=>{
 
         try{
-            const userdata=await fetch(`http://blog-production-75ce.up.railway.app/update/${id}`,{
+            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/update/${id}`,{
                 method:"PUT",
                 credentials: "include",
                 headers:{
