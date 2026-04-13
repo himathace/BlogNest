@@ -39,7 +39,7 @@ app.get("/auth/google/callback",
             // Generate JWT token
             const token = jwt.sign(
                 { username: req.user.username }, 
-                process.env.serect_key,
+                process.env.JWT_SECRET,
             )
             
             // Set cookie
