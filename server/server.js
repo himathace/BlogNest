@@ -18,7 +18,7 @@ require("./config/passport")
 
 app.use(express.json())  // converting a JSON string  into a JavaScript object
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://blog-three-zeta-56.vercel.app",
     credentials:true
 }))
 app.use(cookieparder())

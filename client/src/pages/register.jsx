@@ -14,7 +14,7 @@ function Register(){
 
         try{
 
-            const userdata=await fetch("http://localhost:3000/register",{
+            const userdata=await fetch("http://blog-production-75ce.up.railway.app/register",{
                 method:"POST",
                 headers:{
                     "content-type":"application/Json"

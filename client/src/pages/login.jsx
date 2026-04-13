@@ -10,7 +10,7 @@ function Login(){
 
     async function googlelog(){
         try{
-            window.location.href = "http://localhost:3000/auth/google"
+            window.location.href = "http://blog-production-75ce.up.railway.app/auth/google"
         }
         catch(error){
             alert(error)
@@ -25,7 +25,7 @@ function Login(){
 
         try{
 
-            const responce=await fetch("http://localhost:3000/login",{
+            const responce=await fetch("http://blog-production-75ce.up.railway.app/login",{
                 method:"POST",
                 credentials:"include",
                 headers:{

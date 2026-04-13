@@ -27,7 +27,7 @@ function Dash(){
             setLoading(true)
             
             try{
-                const userdata=await fetch("http://localhost:3000/dashboard",{
+                const userdata=await fetch("http://blog-production-75ce.up.railway.app/dashboard",{
                     method: "GET",
                     credentials: "include", // send or reserve cookies
                     headers:{
@@ -64,7 +64,7 @@ function Dash(){
     const logout=async ()=>{
 
         try{
-            const logoutuser=await fetch("http://localhost:3000/logout",{
+            const logoutuser=await fetch("http://blog-production-75ce.up.railway.app/logout",{
                 method: "POST",
                 credentials: "include",
                 headers :{
@@ -91,7 +91,7 @@ function Dash(){
 
             try{
 
-                const userdata=await fetch(`http://localhost:3000?search=${searchblogs}&category=${catogary}`)
+                const userdata=await fetch(`http://blog-production-75ce.up.railway.app?search=${searchblogs}&category=${catogary}`)
                 const data=await userdata.json()
                 setdiserch(data.message)
 
@@ -122,7 +122,7 @@ function Dash(){
             <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
                 <nav className="bg-white shadow-sm border-b border-gray-100 py-4 px-6 md:px-8">
                     <div className="max-w-4xl mx-auto flex justify-between items-center">
-                    <div className="text-lg font-bold text-gray-900">My Blog</div>
+                    <div className="text-lg font-bold text-gray-900">BlogNest</div>
                     <ul className="flex space-x-6">
 
                         {

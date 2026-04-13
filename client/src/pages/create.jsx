@@ -14,7 +14,7 @@ function Create(){
 
         try{
 
-            const userdata=await fetch("http://localhost:3000/create",{
+            const userdata=await fetch("http://blog-production-75ce.up.railway.app/create",{
                 method:"POST",
                 credentials: "include",
                 headers:{
