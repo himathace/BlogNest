@@ -51,10 +51,10 @@ app.get("/auth/google/callback",
             })
             
             // Redirect to frontend
-            res.redirect("https://blog-production-75ce.up.railway.app")
+            res.redirect("https://blog-three-zeta-56.vercel.app")
         } catch (error) {
             console.error(error)
-            res.redirect("https://blog-production-75ce.up.railway.app/login?error=auth_failed")
+            res.redirect("https://blog-three-zeta-56.vercel.app/login?error=auth_failed")
         }
     }
 )
