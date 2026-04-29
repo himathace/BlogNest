@@ -12,13 +12,24 @@ const blog=require("./schema/blogdata")
 const passport=require("passport")
 const dns=require("dns")
 
+const isProduction=process.env.NODE_ENV==="production"
+const productionClientUrl="https://blog-three-zeta-56.vercel.app"
+const localClientUrl="http://localhost:5173"
+const clientUrl=process.env.CLIENT_URL || (isProduction ? productionClientUrl : localClientUrl)
+const allowedOrigins=[productionClientUrl, localClientUrl, "http://127.0.0.1:5173"]
+
 dns.setServers(["8.8.8.8","8.8.4.4"])
 require("./config/passport")
 
 
 app.use(express.json())  // converting a JSON string  into a JavaScript object
 app.use(cors({
-    origin:"https://blog-three-zeta-56.vercel.app",
+    origin:(origin, callback)=>{
+        if(!origin || allowedOrigins.includes(origin)){
+            return callback(null, true)
+        }
+        return callback(new Error(`CORS blocked for origin: ${origin}`))
+    },
     credentials:true
 }))
 app.use(cookieparder())
@@ -45,16 +56,16 @@ app.get("/auth/google/callback",
             // Set cookie
             res.cookie("logincookie", token, {
                 httpOnly: true,
-                secure: true,
-                sameSite: "none",
+                secure: isProduction,
+                sameSite: isProduction ? "none" : "lax",
                 maxAge: 60 * 60 * 1000
             })
             
             // Redirect to frontend
-            res.redirect("https://blog-three-zeta-56.vercel.app")
+            res.redirect(clientUrl)
         } catch (error) {
             console.error(error)
-            res.redirect("https://blog-three-zeta-56.vercel.app/login?error=auth_failed")
+            res.redirect(`${clientUrl}/login?error=auth_failed`)
         }
     }
 )
@@ -124,8 +135,8 @@ app.post("/login",async(req,res)=>{
     
         res.cookie("logincookie",token,{
             httpOnly:true,
-            secure:true,
-            sameSite:"none",
+            secure:isProduction,
+            sameSite:isProduction ? "none" : "lax",
             maxAge:60*60*1000
         })
         res.status(200).json({message:"logged in",status:200})  // convert js object in to json string

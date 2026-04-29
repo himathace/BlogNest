@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { API_URL } from "../lib/api"
 
 function Create(){
 
@@ -14,7 +15,7 @@ function Create(){
 
         try{
 
-            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/create`,{
+            const userdata=await fetch(`${API_URL}/create`,{
                 method:"POST",
                 credentials: "include",
                 headers:{

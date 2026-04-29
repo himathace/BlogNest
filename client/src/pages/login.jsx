@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { API_URL } from "../lib/api"
 
 function Login(){
 
@@ -10,7 +11,7 @@ function Login(){
 
     async function googlelog(){
         try{
-            window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
+            window.location.href = `${API_URL}/auth/google`
         }
         catch(error){
             alert(error)
@@ -25,7 +26,7 @@ function Login(){
 
         try{
 
-            const responce=await fetch(`${import.meta.env.VITE_API_URL}/login`,{
+            const responce=await fetch(`${API_URL}/login`,{
                 method:"POST",
                 credentials:"include",
                 headers:{

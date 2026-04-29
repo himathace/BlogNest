@@ -3,6 +3,7 @@ import { useNavigate} from "react-router-dom"
 import Postcard from "../cards/postcard"
 import Error from "../cards/error"
 import {motion} from "motion/react"
+import { API_URL } from "../lib/api"
 
 function Dash(){
 
@@ -27,7 +28,7 @@ function Dash(){
             setLoading(true)
             
             try{
-                const userdata=await fetch(`${import.meta.env.VITE_API_URL}/dashboard`,{
+                const userdata=await fetch(`${API_URL}/dashboard`,{
                     method: "GET",
                     credentials: "include", // send or reserve cookies
                     headers:{
@@ -64,7 +65,7 @@ function Dash(){
     const logout=async ()=>{
 
         try{
-            const logoutuser=await fetch(`${import.meta.env.VITE_API_URL}/logout`,{
+            const logoutuser=await fetch(`${API_URL}/logout`,{
                 method: "POST",
                 credentials: "include",
                 headers :{
@@ -91,7 +92,7 @@ function Dash(){
 
             try{
 
-                const userdata=await fetch(`${import.meta.env.VITE_API_URL}?search=${searchblogs}&category=${catogary}`)
+                const userdata=await fetch(`${API_URL}?search=${searchblogs}&category=${catogary}`)
                 const data=await userdata.json()
                 setdiserch(data.message)
 

@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import { API_URL } from "../lib/api"
 
 function Update(){
 
@@ -16,7 +17,7 @@ function Update(){
     const updatedata=async ()=>{
 
         try{
-            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/update/${id}`,{
+            const userdata=await fetch(`${API_URL}/update/${id}`,{
                 method:"PUT",
                 credentials: "include",
                 headers:{

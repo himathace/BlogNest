@@ -2,6 +2,7 @@ import { useEffect,useState } from "react"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { MessageCircle, Bookmark, ThumbsUp, ThumbsDown, Send } from "lucide-react"
+import { API_URL } from "../lib/api"
 
 
 function Details(){
@@ -26,7 +27,7 @@ function Details(){
         const displaydetails=async ()=>{
 
             try{
-                const userdata=await fetch(`${import.meta.env.VITE_API_URL}/details/${id}`,{
+                const userdata=await fetch(`${API_URL}/details/${id}`,{
                     credentials:"include" // include credentials (cookies, authorization headers, and TLS client certificates) when making the HTTP request.
                 })
                 const datax=await userdata.json()
@@ -51,7 +52,7 @@ function Details(){
 
         try{
 
-            const userdata=await fetch(`${import.meta.env.VITE_API_URL}/delete/${id}`,{
+            const userdata=await fetch(`${API_URL}/delete/${id}`,{
                 method:"DELETE",
                 credentials: "include"
             })
