@@ -41,9 +41,25 @@ app.use(cors({
 app.use(cookieparder())
 
 
-mongoose.connect(process.env.connection_string)
-.then(()=>console.log("database connected"))
-.catch((error)=>console.error(error))
+// MongoDB connection - retry logic for testing
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect(process.env.connection_string)
+    .then(()=>console.log("database connected"))
+    .catch((error)=>{
+        console.error("Initial connection failed:", error.message)
+    })
+
+    // Handle disconnection and reconnection (only in non-test env)
+    mongoose.connection.on('disconnected', () => {
+        console.log('MongoDB disconnected, attempting to reconnect...')
+        setTimeout(() => {
+            mongoose.connect(process.env.connection_string)
+        }, 5000)
+    })
+} else {
+    // In test environment, the Jest setup starts an in-memory MongoDB and connects.
+    console.log('Test environment detected: skipping initial mongoose.connect')
+}
 
 app.get("/auth/google",
     passport.authenticate("google",{scope: ["profile","email"]})
@@ -107,14 +123,15 @@ app.post("/register",[
                 const newuser=new users({username:enterusername,email:enteremail,password:hashedPassword}) // create a new user
                 await newuser.save()
                 console.log("user created")
+                res.status(200).json({status:200})
             }
             catch(error){
                 console.log(error)
+                res.status(500).json({status:500})
             }
         }
         createuser()
 
-        res.status(200).json({status:200})
     }
 
 
@@ -129,12 +146,12 @@ app.post("/login",async(req,res)=>{
 
         const useremail=await users.findOne({email : req.body.username})
         if(!useremail){
-            res.status(400).json({message:"username or password invalid",status:400})
+            return res.status(400).json({message:"username or password invalid",status:400})
         }
 
         const isMatch = await bcrypt.compare(req.body.password, useremail.password)
         if(!isMatch){
-            res.status(400).json({message:"username or password invalid",status:400})
+            return res.status(400).json({message:"username or password invalid",status:400})
         }
 
         const token=jwt.sign({username:useremail.username},process.env.JWT_SECRET)
