@@ -1,0 +1,36 @@
+name: Run Backend Tests
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:6
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./server
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./server
+        env:
+          connection_string: mongodb://localhost:27017/blog_test
+          JWT_SECRET: test_secret_key_123
