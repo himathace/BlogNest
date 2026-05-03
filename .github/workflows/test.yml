@@ -30,6 +30,7 @@ jobs:
 
       - name: check formatting
         run: npm run format:check
+        working-directory: ./server
 
       - name: Run tests
         run: npm test
