@@ -28,6 +28,9 @@ jobs:
         run: npm install
         working-directory: ./server
 
+      - name: check formatting
+        run: npm run format:check
+
       - name: Run tests
         run: npm test
         working-directory: ./server

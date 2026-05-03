@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server",
-    "test": "cross-env NODE_ENV=test jest --forceExit"
+    "test": "cross-env NODE_ENV=test jest --forceExit",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +30,7 @@
     "cross-env": "^10.1.0",
     "jest": "^30.3.0",
     "mongodb-memory-server": "^11.1.0",
+    "prettier": "3.8.3",
     "supertest": "^7.2.2"
   }
 }
